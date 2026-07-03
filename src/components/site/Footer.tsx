@@ -20,12 +20,12 @@ export function Footer() {
             The AI monitoring layer for your existing CCTV — real-time detection, virtual zones, and instant alerts.
           </p>
           <div className="mt-6 flex items-center gap-3">
-            <a href="https://linkedin.com" aria-label="LinkedIn" className="p-2 rounded-md border border-border hover:border-primary/40 transition-colors">
+            {/*<a href="https://linkedin.com" aria-label="LinkedIn" className="p-2 rounded-md border border-border hover:border-primary/40 transition-colors">
               <LinkedinIcon className="h-4 w-4" />
             </a>
             <a href="mailto:hello@smartguard.ai" aria-label="Email" className="p-2 rounded-md border border-border hover:border-primary/40 transition-colors">
               <Mail className="h-4 w-4" />
-            </a>
+            </a>*/}
           </div>
         </div>
 

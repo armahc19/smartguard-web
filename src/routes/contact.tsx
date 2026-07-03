@@ -30,6 +30,7 @@ function ContactPage() {
       </section>
 
       <section className="container-page py-12 grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+        {/*
         <form
           className="glass-panel p-8 space-y-4"
           onSubmit={(e) => { e.preventDefault(); setSent(true); }}
@@ -66,13 +67,26 @@ function ContactPage() {
             </>
           )}
         </form>
+        */}
+
+        <div className="glass-panel p-8 space-y-6">
+          <h2 className="text-2xl font-semibold text-center mb-6">Reach Out Directly</h2>
+          <div className="flex flex-col gap-4 max-w-sm mx-auto">
+            <a href="mailto:armahc19@gmail.com" className="btn-primary w-full justify-center text-lg py-3">
+              <MailIcon className="h-5 w-5 mr-2" /> Email Us
+            </a>
+            <a href="https://wa.me/233509676082" target="_blank" rel="noopener noreferrer" className="btn-primary w-full justify-center text-lg py-3 bg-[#25D366] hover:bg-[#25D366]/90 border-transparent text-white">
+              <Phone className="h-5 w-5 mr-2" /> WhatsApp Us
+            </a>
+          </div>
+        </div>
 
         <aside className="space-y-6">
           <div className="glass-panel p-6">
             <h2 className="text-lg font-semibold">Talk to us</h2>
             <div className="mt-4 space-y-3 text-sm">
-              <div className="flex items-center gap-2"><MailIcon className="h-4 w-4 text-primary" /> hello@smartguard.ai</div>
-              <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> +1 (555) 010-1010</div>
+              <div className="flex items-center gap-2"><MailIcon className="h-4 w-4 text-primary" /> armahc19@gmail.com</div>
+              <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> 0509676082</div>
               <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> Global — remote first</div>
             </div>
           </div>

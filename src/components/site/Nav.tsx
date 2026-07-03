@@ -33,7 +33,7 @@ export function Nav() {
     >
       <div className="container-page flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <Logo className="h-7 w-auto" />
+          <Logo className="h-9 w-auto" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">

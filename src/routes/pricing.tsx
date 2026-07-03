@@ -17,9 +17,9 @@ export const Route = createFileRoute("/pricing")({
 });
 
 const tiers = [
-  { name: "Starter", price: "$149", period: "/mo", tag: "For small businesses", cta: "Book Demo", features: ["Person detection", "Virtual zones", "Rule engine", "Live dashboard", "Up to 4 cameras", "Community support"] },
-  { name: "Standard", price: "$399", period: "/mo", tag: "Growing operations", highlight: true, cta: "Book Demo", features: ["Everything in Starter", "WhatsApp alerts", "Email alerts", "Up to 20 cameras", "Analytics & reports", "Priority support"] },
-  { name: "Enterprise", price: "Custom", period: "", tag: "Custom deployment", cta: "Contact Sales", features: ["Custom AI models", "PPE, product & vehicle detection", "API integration", "Unlimited cameras", "SSO & audit logs", "Dedicated support"] },
+  { name: "Starter", price: "Contact Sales", period: "", tag: "For small businesses", cta: "Book Demo", features: ["Person detection", "Virtual zones", "Rule engine", "Live dashboard", "Up to 4 cameras", "Community support"] },
+  { name: "Standard", price: "Contact Sales", period: "", tag: "Growing operations", highlight: true, cta: "Book Demo", features: ["Everything in Starter", "WhatsApp alerts", "Email alerts", "Up to 20 cameras", "Analytics & reports", "Priority support"] },
+  { name: "Enterprise", price: "Contact Sales", period: "", tag: "Custom deployment", cta: "Contact Sales", features: ["Custom AI models", "PPE, product & vehicle detection", "API integration", "Unlimited cameras", "SSO & audit logs", "Dedicated support"] },
 ];
 
 function PricingPage() {
