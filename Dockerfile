@@ -10,7 +10,7 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application (outputs to .output/)
+# Build the application
 RUN npm run build
 
 # Production stage
@@ -21,6 +21,7 @@ WORKDIR /app
 # Copy only the necessary files from builder
 COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/package.json ./package.json
+# CRITICAL: Copy node_modules too!
 COPY --from=builder /app/node_modules ./node_modules
 
 # Set environment variables
