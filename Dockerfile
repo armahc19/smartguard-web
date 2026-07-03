@@ -1,16 +1,35 @@
-FROM node:22-alpine AS builder
+# Build stage
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm install
+# Copy package files
+COPY package*.json ./
+RUN npm ci
 
+# Copy source code
 COPY . .
 
+# Build the application (outputs to .output/)
 RUN npm run build
 
-FROM nginx:alpine
+# Production stage
+FROM node:20-alpine
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-EXPOSE 80
+# Copy only the necessary files from builder
+COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOST=0.0.0.0
+
+# Expose the application port
+EXPOSE 3000
+
+# Start the Nitro server
+CMD ["node", ".output/server/index.mjs"]
