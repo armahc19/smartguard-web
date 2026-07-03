@@ -1,3 +1,24 @@
+# Step 1: Build stage
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy all files
+COPY . .
+
+# Set Nitro preset to node-server so it builds a Node app instead of Cloudflare worker
+ENV NITRO_PRESET=node-server
+
+# Build the app
+RUN npm run build
+
+# Step 2: Production stage
 FROM node:20-alpine
 
 WORKDIR /app
