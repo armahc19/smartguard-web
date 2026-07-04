@@ -22,8 +22,10 @@ ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
+# Copy the generated Nitro production build
 COPY --from=builder /app/.output ./.output
 
 EXPOSE 3000
 
-CMD ["node", ".output/server/_runtime.mjs"]
+# FIX: Execute index.mjs, which boots up the actual HTTP server
+CMD ["node", ".output/server/index.mjs"]

@@ -4,17 +4,14 @@ services:
   app:
     build: .
     container_name: smartguard-web
-
     restart: unless-stopped
-
     ports:
       - "3010:3000"
-
     environment:
       NODE_ENV: production
       NITRO_PRESET: node-server
       HOST: 0.0.0.0
       PORT: 3000
-
-    volumes:
-      - ./.env:/app/.env:ro
+    # Temporary diagnostic step: Comment out the .env volume to check if it's the culprit
+    # volumes:
+    #   - ./.env:/app/.env:ro
