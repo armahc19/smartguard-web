@@ -1,23 +1,24 @@
-# Use the exact same engine you code with
+# Use the stable Bun engine
 FROM oven/bun:1.2-alpine
 
 WORKDIR /app
 
-# Set target configurations
+# Force production mode
 ENV NODE_ENV=production
-ENV NITRO_PRESET=node-server
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
-# Copy lock files and install dependencies exactly using Bun
+# Copy lockfiles and install dependencies flawlessly
 COPY package.json bun.lock* ./
 RUN bun install --frozen-lockfile
 
-# Copy everything else and execute the Vite / Nitro compilation
+# Copy codebase
 COPY . .
+
+# Compile your pure Vite SPA assets (defaults to outputting into the /dist folder)
 RUN bun run build
 
 EXPOSE 3000
 
-# Start up using Bun directly to handle execution smoothly
+# Fire up the static preview server
 CMD ["bun", "run", "start"]
