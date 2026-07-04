@@ -1,30 +1,28 @@
-# Use Bun for building
-FROM oven/bun:1.2-alpine AS builder
+# 1. Use Node 22 Alpine to match your environment
+FROM node:22-alpine
+
 WORKDIR /app
 
-COPY package.json bun.lock* ./
-RUN bun install --frozen-lockfile
-
-COPY . .
-
-# Set Nitro presets for a standard server
+# 2. Force Nitro to build a standard node server instead of a Cloudflare worker
 ENV NODE_ENV=production
 ENV NITRO_PRESET=node-server
-
-# FIX: Force Vite to build using standard TanStack presets instead of the Lovable Cloudflare wrapper
-RUN bun run build
-
-# Runner stage using a standard Node engine
-FROM node:22-alpine AS runner
-WORKDIR /app
-
-ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
-COPY --from=builder /app/.output ./.output
+# 3. Copy package files first to cache dependencies
+COPY package*.json ./
 
+# 4. Install all dependencies needed for the build and execution
+RUN npm install
+
+# 5. Copy the rest of the application code
+COPY . .
+
+# 6. Build the TanStack / Nitro project
+RUN npm run build
+
+# 7. Expose the internal port
 EXPOSE 3000
 
-# Run the verified index.mjs server file
-CMD ["node", ".output/server/index.mjs"]
+# 8. Start the production server using the script we just added
+CMD ["npm", "run", "start"]
