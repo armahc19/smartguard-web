@@ -1,17 +1,16 @@
 version: "3.9"
 
 services:
-  app:
+  web:
     build: .
     container_name: smartguard-web
     restart: unless-stopped
     ports:
       - "3010:3000"
     environment:
-      NODE_ENV: production
-      NITRO_PRESET: node-server
-      HOST: 0.0.0.0
-      PORT: 3000
-    # Temporary diagnostic step: Comment out the .env volume to check if it's the culprit
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=3000
+    # Temporarily comment this out to isolate if your local .env is causing the crash
     # volumes:
     #   - ./.env:/app/.env:ro

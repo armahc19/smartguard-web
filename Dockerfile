@@ -1,31 +1,27 @@
-FROM oven/bun:1 AS builder
-
+# Use the official Bun image for both building and running
+FROM oven/bun:1.2-alpine AS base
 WORKDIR /app
 
+# Install dependencies using Bun cache benefits
 COPY package.json bun.lock* ./
 RUN bun install --frozen-lockfile
 
+# Copy project source files 
 COPY . .
 
+# Force the environment variable to node-server for production bundling
 ENV NITRO_PRESET=node-server
-ENV HOST=0.0.0.0
-ENV PORT=3000
+ENV NODE_ENV=production
 
+# Compile the TanStack Start production build
 RUN bun run build
 
+# Expose the web-server port internally
+EXPOSE 3000
 
-FROM node:22-alpine
-
-WORKDIR /app
-
-ENV NODE_ENV=production
+# Set target network routing variables
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
-# Copy the generated Nitro production build
-COPY --from=builder /app/.output ./.output
-
-EXPOSE 3000
-
-# FIX: Execute index.mjs, which boots up the actual HTTP server
-CMD ["node", ".output/server/index.mjs"]
+# Execute the primary output entrypoint file via Bun's fast node-compatibility layer
+CMD ["bun", ".output/server/index.mjs"]
