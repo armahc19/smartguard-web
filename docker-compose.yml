@@ -1,7 +1,8 @@
-services:
-  web:
-    build: .
-    container_name: smartguard-web
-    restart: unless-stopped
-    ports:
-      - "3010:80"
+web:
+  build:
+    context: .
+    dockerfile: Dockerfile
+  container_name: smartguard-web
+  ports:
+    - "3010:80"     # <-- nginx listens on 80, not 3000
+  restart: unless-stopped
