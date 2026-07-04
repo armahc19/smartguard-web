@@ -1,27 +1,33 @@
-# Use the official Bun image for both building and running
-FROM oven/bun:1.2-alpine AS base
+# --- BUILD STAGE ---
+FROM oven/bun:1.2-alpine AS builder
 WORKDIR /app
 
-# Install dependencies using Bun cache benefits
+# Copy dependency configuration files
 COPY package.json bun.lock* ./
 RUN bun install --frozen-lockfile
 
-# Copy project source files 
+# Copy your full codebase
 COPY . .
 
-# Force the environment variable to node-server for production bundling
-ENV NITRO_PRESET=node-server
+# Explicitly trigger production compilation variables
 ENV NODE_ENV=production
+ENV NITRO_PRESET=node-server
 
-# Compile the TanStack Start production build
+# Compile your code into production chunks
 RUN bun run build
 
-# Expose the web-server port internally
-EXPOSE 3000
+# --- RUNNER STAGE ---
+FROM node:22-alpine AS runner
+WORKDIR /app
 
-# Set target network routing variables
+ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
-# Execute the primary output entrypoint file via Bun's fast node-compatibility layer
-CMD ["bun", ".output/server/index.mjs"]
+# Copy the entire build workspace created by your Lovable/TanStack build configurations
+COPY --from=builder /app/.output ./.output
+
+EXPOSE 3000
+
+# FIX: Run index.js instead of index.mjs
+CMD ["node", ".output/server/index.js"]

@@ -11,6 +11,3 @@ services:
       - NODE_ENV=production
       - HOST=0.0.0.0
       - PORT=3000
-    # Temporarily comment this out to isolate if your local .env is causing the crash
-    # volumes:
-    #   - ./.env:/app/.env:ro
