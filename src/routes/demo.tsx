@@ -1,23 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { motion } from "framer-motion";
 import { ArrowRight, Brain, MapPin, Cog, MessageCircle, Mail } from "lucide-react";
 
-export const Route = createFileRoute("/demo")({
-  head: () => ({
-    meta: [
-      { title: "Live Demo — See SmartGuard Detect and Alert in Real Time" },
-      { name: "description", content: "Watch SmartGuard's AI detect a person entering a virtual zone, trigger a rule and send an instant alert — all in real time." },
-      { property: "og:title", content: "SmartGuard Live Demo" },
-      { property: "og:description", content: "Interactive product preview of the AI detection and alert flow." },
-      { property: "og:url", content: "/demo" },
-    ],
-    links: [{ rel: "canonical", href: "/demo" }],
-  }),
-  component: DemoPage,
-});
 
-function DemoPage() {
+
+export default function DemoPage() {
   return (
     <SiteLayout>
       <section className="container-page pt-16 pb-6 hero-gradient">

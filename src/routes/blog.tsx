@@ -1,24 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/blog")({
-  head: () => ({
-    meta: [
-      { title: "Blog — AI Security, Workplace Safety & CCTV Monitoring | SmartGuard" },
-      { name: "description", content: "Insights on AI security, CCTV monitoring, workplace safety, operations and industry guides from the SmartGuard team." },
-      { property: "og:title", content: "SmartGuard Blog" },
-      { property: "og:description", content: "AI security, CCTV monitoring, workplace safety." },
-      { property: "og:url", content: "/blog" },
-    ],
-    links: [{ rel: "canonical", href: "/blog" }],
-  }),
-  component: BlogPage,
-});
+
 
 import { blogArticles } from "@/lib/blog-data";
 
-function BlogPage() {
+export default function BlogPage() {
   return (
     <SiteLayout>
       <section className="container-page pt-16 pb-8 hero-gradient">
@@ -30,7 +18,7 @@ function BlogPage() {
       </section>
       <section className="container-page py-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {blogArticles.map((p) => (
-          <Link key={p.slug} to="/blog/$slug" params={{ slug: p.slug }} className="glass-panel p-6 group hover:border-primary/30 transition-colors flex flex-col h-full">
+          <Link key={p.slug} to={`/blog/${p.slug }`} className="glass-panel p-6 group hover:border-primary/30 transition-colors flex flex-col h-full">
             <div className="text-xs uppercase tracking-widest text-primary">{p.category}</div>
             <h2 className="mt-3 text-lg font-semibold group-hover:text-primary-glow transition-colors">{p.title}</h2>
             <p className="mt-2 text-sm text-muted-foreground flex-grow">{p.excerpt}</p>

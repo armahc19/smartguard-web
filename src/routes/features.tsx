@@ -1,20 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Brain, MapPin, Cog, Bell, LayoutDashboard, Zap, ArrowRight, CheckCircle2 } from "lucide-react";
 
-export const Route = createFileRoute("/features")({
-  head: () => ({
-    meta: [
-      { title: "Features — Person Detection, Zones, Rules & Alerts | SmartGuard" },
-      { name: "description", content: "Explore SmartGuard features: real-time person detection, virtual zones, no-code rule engine, WhatsApp & email alerts, and a live monitoring dashboard." },
-      { property: "og:title", content: "SmartGuard Features" },
-      { property: "og:description", content: "Every capability you need to turn CCTV into intelligent monitoring." },
-      { property: "og:url", content: "/features" },
-    ],
-    links: [{ rel: "canonical", href: "/features" }],
-  }),
-  component: FeaturesPage,
-});
+
 
 const features = [
   { icon: Brain, title: "Person Detection", desc: "State-of-the-art vision models detect people entering camera scenes in real time, with confidence scoring and configurable thresholds.", bullets: ["Sub-second latency", "High accuracy in low light", "Runs on your existing cameras"] },
@@ -25,7 +13,7 @@ const features = [
   { icon: Zap, title: "Custom AI Models", desc: "For enterprise deployments: PPE detection, product detection, vehicle detection, and models trained on your specific operation.", bullets: ["PPE compliance", "Vehicle & product detection", "Custom training pipeline"] },
 ];
 
-function FeaturesPage() {
+export default function FeaturesPage() {
   return (
     <SiteLayout>
       <section className="container-page pt-16 pb-8 hero-gradient">

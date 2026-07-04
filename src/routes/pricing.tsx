@@ -1,20 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-export const Route = createFileRoute("/pricing")({
-  head: () => ({
-    meta: [
-      { title: "Pricing — SmartGuard AI CCTV Monitoring" },
-      { name: "description", content: "Simple, transparent pricing for SmartGuard. Starter, Standard and Enterprise plans with custom AI models and unlimited cameras." },
-      { property: "og:title", content: "SmartGuard Pricing" },
-      { property: "og:description", content: "Three plans. Start small, scale to enterprise." },
-      { property: "og:url", content: "/pricing" },
-    ],
-    links: [{ rel: "canonical", href: "/pricing" }],
-  }),
-  component: PricingPage,
-});
+
 
 const tiers = [
   { name: "Starter", price: "Contact Sales", period: "", tag: "For small businesses", cta: "Book Demo", features: ["Person detection", "Virtual zones", "Rule engine", "Live dashboard", "Up to 4 cameras", "Community support"] },
@@ -22,7 +10,7 @@ const tiers = [
   { name: "Enterprise", price: "Contact Sales", period: "", tag: "Custom deployment", cta: "Contact Sales", features: ["Custom AI models", "PPE, product & vehicle detection", "API integration", "Unlimited cameras", "SSO & audit logs", "Dedicated support"] },
 ];
 
-function PricingPage() {
+export default function PricingPage() {
   return (
     <SiteLayout>
       <section className="container-page pt-16 pb-8 hero-gradient text-center">

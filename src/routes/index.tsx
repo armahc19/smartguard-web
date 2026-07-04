@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -23,25 +23,9 @@ import {
 import heroImg from "@/assets/hero-dashboard.jpg";
 import { SiteLayout } from "@/components/site/SiteLayout";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "SmartGuard — AI That Watches Your CCTV Cameras" },
-      {
-        name: "description",
-        content:
-          "Turn any CCTV into an intelligent monitoring system. Real-time person detection, virtual zones, custom rules, and instant WhatsApp & email alerts.",
-      },
-      { property: "og:title", content: "SmartGuard — AI CCTV Monitoring Platform" },
-      { property: "og:description", content: "AI that watches your cameras so your team doesn't have to." },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
-  component: HomePage,
-});
 
-function HomePage() {
+
+export default function HomePage() {
   return (
     <SiteLayout>
       <Hero />

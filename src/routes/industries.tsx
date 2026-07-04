@@ -1,20 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-export const Route = createFileRoute("/industries")({
-  head: () => ({
-    meta: [
-      { title: "Industries — Retail, Warehouse, Factory, Schools | SmartGuard" },
-      { name: "description", content: "SmartGuard deployments across retail, warehouse, factories, schools, construction and offices. Purpose-tuned AI monitoring for every environment." },
-      { property: "og:title", content: "SmartGuard Industries" },
-      { property: "og:description", content: "AI CCTV monitoring across every industry that takes safety seriously." },
-      { property: "og:url", content: "/industries" },
-    ],
-    links: [{ rel: "canonical", href: "/industries" }],
-  }),
-  component: IndustriesPage,
-});
+
 
 const industries = [
   { name: "Retail", challenges: ["Shrinkage & shoplifting", "Cashier-area incidents", "Loitering in aisles"], solves: ["Zone-based cashier monitoring", "After-hours entry alerts", "Loitering & dwell-time detection"] },
@@ -25,7 +13,7 @@ const industries = [
   { name: "Offices", challenges: ["Server room access", "After-hours activity", "Reception monitoring"], solves: ["Zone-based server room rules", "Off-hours WhatsApp alerts", "Access-log incidents"] },
 ];
 
-function IndustriesPage() {
+export default function IndustriesPage() {
   return (
     <SiteLayout>
       <section className="container-page pt-16 pb-8 hero-gradient">

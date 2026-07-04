@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ChevronRight, Clock, Calendar } from "lucide-react";
 import { getArticleBySlug, getRelatedArticles } from "@/lib/blog-data";
@@ -6,29 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import React from "react";
 
-export const Route = createFileRoute("/blog_/$slug")({
-  head: ({ loaderData }) => {
-    if (!loaderData) return {};
-    const { seoTitle, seoDescription, ogTitle, ogDescription, title } = loaderData;
-    return {
-      meta: [
-        { title: seoTitle || title },
-        { name: "description", content: seoDescription },
-        { property: "og:title", content: ogTitle || seoTitle || title },
-        { property: "og:description", content: ogDescription || seoDescription },
-        { property: "og:type", content: "article" },
-      ],
-    };
-  },
-  loader: ({ params }) => {
-    const article = getArticleBySlug(params.slug);
-    if (!article) {
-      throw new Error("Article not found");
-    }
-    return article;
-  },
-  component: ArticlePage,
-});
+
 
 const generateId = (children: React.ReactNode): string => {
   if (typeof children === 'string') {
@@ -58,8 +36,10 @@ function extractHeadings(markdown: string) {
   return headings;
 }
 
-function ArticlePage() {
-  const article = Route.useLoaderData();
+export default function ArticlePage() {
+  const { slug } = useParams();
+  const article = React.useMemo(() => getArticleBySlug(slug || ""), [slug]);
+  if (!article) return <div className="p-8 text-center">Article not found</div>;
   const relatedArticles = getRelatedArticles(article);
   const headings = React.useMemo(() => extractHeadings(article.content), [article.content]);
 
@@ -174,10 +154,7 @@ function ArticlePage() {
                   </h3>
                   <div className="flex flex-col gap-5">
                     {relatedArticles.map((rel) => (
-                      <Link
-                        key={rel.slug}
-                        to="/blog/$slug"
-                        params={{ slug: rel.slug }}
+                      <Link key={rel.slug} to={`/blog/${rel.slug }`}
                         className="group block"
                       >
                         <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">{rel.category}</div>

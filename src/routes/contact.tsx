@@ -1,23 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { useState } from "react";
 import { ArrowRight, MapPin, Phone, Mail as MailIcon, CheckCircle2 } from "lucide-react";
 
-export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — Book a SmartGuard Demo" },
-      { name: "description", content: "Book a demo or talk to sales. See SmartGuard AI CCTV monitoring running on a live feed in 20 minutes." },
-      { property: "og:title", content: "Contact SmartGuard" },
-      { property: "og:description", content: "Book a demo. We'll show SmartGuard on a live feed." },
-      { property: "og:url", content: "/contact" },
-    ],
-    links: [{ rel: "canonical", href: "/contact" }],
-  }),
-  component: ContactPage,
-});
 
-function ContactPage() {
+
+export default function ContactPage() {
   const [sent, setSent] = useState(false);
   return (
     <SiteLayout>
