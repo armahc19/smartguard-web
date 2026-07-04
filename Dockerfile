@@ -1,33 +1,37 @@
-# Build stage
-FROM node:20-alpine AS builder
+# -------------------------
+# Stage 1 - Build
+# -------------------------
+FROM oven/bun:1 AS builder
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-RUN npm ci
+# Copy dependency files
+COPY package.json bun.lock* ./
 
-# Copy source code
+# Install dependencies
+RUN bun install --frozen-lockfile
+
+# Copy source
 COPY . .
 
-# 👇 ADD THIS ONE LINE 👇
+# Build for Node server
 ENV NITRO_PRESET=node-server
+RUN bun run build
 
-# Build the application
-RUN npm run build
-
-# Production stage
-FROM node:20-alpine
+# -------------------------
+# Stage 2 - Production
+# -------------------------
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/.output ./.output
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
-
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV NITRO_PRESET=node-server
 ENV HOST=0.0.0.0
+ENV PORT=3000
+
+# Copy Nitro output
+COPY --from=builder /app/.output ./.output
 
 EXPOSE 3000
 
