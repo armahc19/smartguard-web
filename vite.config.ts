@@ -1,19 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import * as routerPlugin from '@tanstack/router-plugin'
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import tailwindcss from '@tailwindcss/vite'
 
-const TanStackRouterVite = ((routerPlugin as any).TanStackRouterVite ?? (routerPlugin as any).default ?? routerPlugin) as any
-
-// If building inside Docker, bypass Lovable's Cloudflare preset force-override
-const config = {
+export default defineConfig({
   plugins: [
     TanStackRouterVite(),
     react(),
+    tailwindcss(),
+    tsconfigPaths(),
   ],
-  // Ensure nitro configuration reads our environment variable correctly
-  nitro: {
-    preset: process.env.NITRO_PRESET || 'cloudflare-pages'
-  }
-} as any
-
-export default defineConfig(config)
+})

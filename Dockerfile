@@ -1,24 +1,34 @@
-# Use the stable Bun engine
-FROM oven/bun:1.2-alpine
+# Build Stage
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
-# Force production mode
-ENV NODE_ENV=production
-ENV HOST=0.0.0.0
-ENV PORT=3000
-
-# Copy lockfiles and install dependencies flawlessly
-COPY package.json bun.lock* ./
-RUN bun install --frozen-lockfile
+# Copy lockfiles and install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # Copy codebase
 COPY . .
 
-# Compile your pure Vite SPA assets (defaults to outputting into the /dist folder)
-RUN bun run build
+# Build the Vite SPA
+RUN npm run build
 
-EXPOSE 3000
+# Production Stage
+FROM nginx:alpine
 
-# Fire up the static preview server
-CMD ["bun", "run", "start"]
+# Copy the built assets from the build stage to Nginx
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Overwrite the default Nginx config to support SPA routing (fallback to index.html)
+RUN echo 'server { \
+    listen 80; \
+    location / { \
+        root /usr/share/nginx/html; \
+        index index.html index.htm; \
+        try_files $uri $uri/ /index.html; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

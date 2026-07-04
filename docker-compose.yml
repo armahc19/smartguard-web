@@ -4,5 +4,4 @@ services:
     container_name: smartguard-web
     restart: unless-stopped
     ports:
-      - "3010:3000"
-    command: sleep 3600
+      - "3010:80"
