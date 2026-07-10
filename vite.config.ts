@@ -9,4 +9,12 @@ export default defineConfig({
     tailwindcss(),
     tsconfigPaths(),
   ],
+  server: {
+    middlewareMode: false,
+    fs: {
+      strict: false,
+    },
+  },
+  // Ensure .mp4 files are served with the correct MIME type
+  assetsInclude: ['**/*.mp4', '**/*.webm', '**/*.ogg'],
 })

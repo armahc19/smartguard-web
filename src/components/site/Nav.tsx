@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Logo } from "./Logo";
@@ -9,6 +9,7 @@ const links = [
   { to: "/industries", label: "Industries" },
   { to: "/pricing", label: "Pricing" },
   { to: "/blog", label: "Blog" },
+  { to: "/demo", label: "Demo" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -38,14 +39,19 @@ export function Nav() {
 
         <nav className="hidden lg:flex items-center gap-1">
           {links.map((l) => (
-            <Link
+            <NavLink
               key={l.to}
               to={l.to}
-              className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md"
-              activeProps={{ className: "px-3 py-2 text-sm text-foreground font-medium rounded-md" }}
+              className={({ isActive }) => 
+                `px-3 py-2 text-sm transition-colors rounded-md ${
+                  isActive 
+                    ? "text-foreground font-medium" 
+                    : "text-muted-foreground hover:text-foreground"
+                }`
+              }
             >
               {l.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
