@@ -85,7 +85,7 @@ export default function PricingPage() {
             <div className="text-xs uppercase tracking-widest text-muted-foreground">{t.tag}</div>
             <h2 className="mt-2 text-3xl font-semibold">{t.name}</h2>
             <div className="mt-4 flex items-baseline gap-1">
-              <span className="text-5xl font-bold text-gradient-primary">{t.price}</span>
+              <span className="text-3xl font-bold text-gradient-primary">{t.price}</span>
               <span className="text-sm text-muted-foreground">{t.period}</span>
             </div>
             <ul className="mt-6 space-y-2.5 text-sm flex-1">
