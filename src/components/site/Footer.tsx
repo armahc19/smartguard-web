@@ -59,7 +59,7 @@ export function Footer() {
       <div className="border-t border-border/60">
         <div className="container-page py-6 text-xs text-muted-foreground flex flex-col sm:flex-row items-center justify-between gap-2">
           <p>© {new Date().getFullYear()} SmartGuard. All rights reserved.</p>
-          <p>Made for teams that take security seriously.</p>
+          <p>Turn your existing CCTV into an AI-powered security system.</p>
         </div>
       </div>
     </footer>

@@ -461,7 +461,7 @@ function SimulatorScene() {
 
 /* ---------------- Pricing preview ---------------- */
 function PricingPreview() {
-  const tiers = [
+  /*const tiers = [
     {
       name: "Starter",
       price: "$149",
@@ -502,7 +502,65 @@ function PricingPreview() {
         "Dedicated support",
       ],
     },
-  ];
+  ];*/
+  const tiers = [
+  {
+    name: "Starter",
+    price: "GH₵2,000",
+    period: " one-time",
+    tag: "Homes & small businesses",
+    cta: "Book Demo",
+    to: "/contact",
+    features: [
+      "One-time installation",
+      "No monthly subscription",
+      "Up to 4 cameras",
+      "Person & vehicle detection",
+      "Virtual detection zones",
+      "Rule engine",
+      "Live dashboard",
+      "30 days installation support",
+    ],
+  },
+  {
+    name: "Standard",
+    price: "GH₵2,500",
+    period: " + GH₵400/mo",
+    tag: "Growing businesses",
+    highlight: true,
+    cta: "Book Demo",
+    to: "/contact",
+    features: [
+      "Everything in Starter",
+      "Up to 8 cameras",
+      "WhatsApp & Email alerts",
+      "Software & AI updates",
+      "Remote support",
+      "Monthly system health check",
+      "One on-site maintenance visit/month",
+    ],
+  },
+  {
+    name: "Enterprise",
+    price: "GH₵5,000",
+    period: " + GH₵800/mo",
+    tag: "Large organizations",
+    cta: "Contact Sales",
+    to: "/contact",
+    features: [
+      "Everything in Standard",
+      "9+ cameras",
+      "Multi-site deployment",
+      "Custom AI workflows",
+      "Custom detection rules",
+      "API integration",
+      "Priority support",
+      "Unlimited remote support",
+      "Two on-site maintenance visits/month",
+    ],
+  },
+];
+
   return (
     <Section
       eyebrow="Pricing"

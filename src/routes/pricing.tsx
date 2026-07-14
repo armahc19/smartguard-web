@@ -3,11 +3,69 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 
-
+{/*
 const tiers = [
   { name: "Starter", price: "Contact Sales", period: "", tag: "For small businesses", cta: "Book Demo", features: ["Person detection", "Virtual zones", "Rule engine", "Live dashboard", "Up to 4 cameras", "Community support"] },
   { name: "Standard", price: "Contact Sales", period: "", tag: "Growing operations", highlight: true, cta: "Book Demo", features: ["Everything in Starter", "WhatsApp alerts", "Email alerts", "Up to 20 cameras", "Analytics & reports", "Priority support"] },
   { name: "Enterprise", price: "Contact Sales", period: "", tag: "Custom deployment", cta: "Contact Sales", features: ["Custom AI models", "PPE, product & vehicle detection", "API integration", "Unlimited cameras", "SSO & audit logs", "Dedicated support"] },
+];
+*/}
+
+const tiers = [
+  {
+    name: "Starter",
+    price: "GH₵2,000",
+    period: "one-time",
+    tag: "Homes & small businesses",
+    cta: "Book Demo",
+    features: [
+      "One-time installation",
+      "No monthly subscription",
+      "Up to 4 cameras",
+      "Person & vehicle detection",
+      "Virtual detection zones",
+      "Rule engine",
+      "Live dashboard",
+      "Basic user training",
+      "30 days installation support",
+    ],
+  },
+  {
+    name: "Standard",
+    price: "GH₵2,500",
+    period: "+ GH₵400/month",
+    tag: "Growing businesses",
+    highlight: true,
+    cta: "Book Demo",
+    features: [
+      "Everything in Starter",
+      "Up to 8 cameras",
+      "WhatsApp & Email alerts",
+      "Software updates",
+      "Remote support",
+      "AI model improvements",
+      "Monthly system health check",
+      "One on-site maintenance visit/month",
+    ],
+  },
+  {
+    name: "Enterprise",
+    price: "GH₵5,000",
+    period: "+ GH₵800/month",
+    tag: "Large organizations",
+    cta: "Contact Sales",
+    features: [
+      "Everything in Standard",
+      "9+ cameras",
+      "Multi-site deployment",
+      "Custom AI workflows",
+      "Custom detection rules",
+      "Priority support",
+      "Unlimited remote support",
+      "Two on-site maintenance visits/month",
+      "API integration",
+    ],
+  },
 ];
 
 export default function PricingPage() {
